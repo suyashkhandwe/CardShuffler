@@ -37,23 +37,22 @@ public class DeckOfPokerCards implements GenericDeck {
 				String cardRankName;
 				switch (cardRank) {
 				case 1:
-					cardRankName = "A";
+					cardRankName = "A"; // Ace
 					break;
 				case 11:
-					cardRankName = "J";
+					cardRankName = "J"; // Jack
 					break;
 				case 12:
-					cardRankName = "Q";
+					cardRankName = "Q"; // Queen
 					break;
 				case 13:
-					cardRankName = "K";
+					cardRankName = "K"; // King
 					break;
 				default:
 					cardRankName = String.valueOf(cardRank);
 					break;
 				}
-				pokerDeck[cardCounter] = new Card(String.format("%1$s-%2$s", cardRankName, suit[suitCounter]));
-				cardCounter++;
+				pokerDeck[cardCounter++] = new Card(String.format("%1$s-%2$s", cardRankName, suit[suitCounter]));
 			}
 		}
 	}

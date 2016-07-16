@@ -20,8 +20,15 @@ public class CardShufflerEngine {
 	public static void main(String[] args) {
 		Deck pokerDeck = new Deck();
 		pokerDeck.setDeckType(new DeckOfPokerCards());
-		pokerDeck.setupNewDeck("poker");
+		pokerDeck.setupNewDeck("simple");
 		pokerDeck.simpleShuffleCards();
+		for (int i = 0; i < 52; i++) {
+			System.out.println(
+					String.format("%1$s - %2$s", pokerDeck.getDeckName(), pokerDeck.getDeck()[i].getCardName()));
+		}
+
+		pokerDeck.setupNewDeck("complex");
+		pokerDeck.handShuffleCards();
 		for (int i = 0; i < 52; i++) {
 			System.out.println(
 					String.format("%1$s - %2$s", pokerDeck.getDeckName(), pokerDeck.getDeck()[i].getCardName()));

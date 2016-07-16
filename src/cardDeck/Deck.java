@@ -84,16 +84,54 @@ public class Deck {
 	 * Shuffles cards with a simple random logic
 	 */
 	public void simpleShuffleCards() {
-		Random randomize = new Random();
 		Card[] deckToShuffle = this.genericDeck.getDeck();
-
 		for (int cardIdx = 0; cardIdx < this.genericDeck.getCardCountInDeck(); cardIdx++) {
+			// Get a random number to swap the card
+			Random randomize = new Random();
 			int swapIdx = randomize.nextInt(this.genericDeck.getCardCountInDeck());
 
+			// Swap the card
 			Card cardToSwap = deckToShuffle[swapIdx];
 			deckToShuffle[swapIdx] = deckToShuffle[cardIdx];
 			deckToShuffle[cardIdx] = cardToSwap;
 		}
 		this.genericDeck.setDeck(deckToShuffle);
+	}
+
+	/**
+	 * Simulates hand shuffling of cards. Performs the hand shuffling 'n' number
+	 * of times between 1 & 10. Also performs a simple shuffle before
+	 * interleaving is done every time to generate more randomness
+	 */
+	public void handShuffleCards() {
+		// Get a random count (max 10) for the number of times hand-shuffling
+		// needs to be completed
+		Random randomize = new Random();
+		int handShuffleCount = randomize.nextInt(11);
+
+		for (int shuffleCount = 1; shuffleCount <= handShuffleCount; shuffleCount++) {
+
+			// Simple shuffle cards before each hand-shuffling to make it
+			// completely random
+			this.simpleShuffleCards();
+
+			// Get the shuffled card to perform hand shuffling
+			Card[] deckToShuffle = this.genericDeck.getDeck();
+
+			// Split the deck
+			Card[] firstHalf = new Card[this.genericDeck.getCardCountInDeck() / 2];
+			Card[] secondHalf = new Card[this.genericDeck.getCardCountInDeck() / 2];
+			System.arraycopy(deckToShuffle, 0, firstHalf, 0, this.genericDeck.getCardCountInDeck() / 2);
+			System.arraycopy(deckToShuffle, 26, secondHalf, 0, this.genericDeck.getCardCountInDeck() / 2);
+
+			// Interleave split decks
+			int deckToShuffleIdx = 0;
+			deckToShuffle = new Card[this.genericDeck.getCardCountInDeck()];
+			for (int splitDeckIdx = 0; splitDeckIdx < firstHalf.length; splitDeckIdx++) {
+				deckToShuffle[deckToShuffleIdx++] = firstHalf[splitDeckIdx];
+				deckToShuffle[deckToShuffleIdx++] = secondHalf[splitDeckIdx];
+			}
+			this.genericDeck.setDeck(deckToShuffle);
+		}
 	}
 }
