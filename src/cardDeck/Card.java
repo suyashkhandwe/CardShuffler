@@ -1,12 +1,9 @@
-/**
- * This package exposes all the classes related to handling a deck of cards
- */
 package cardDeck;
 
 /**
  * This class represents a single card
  * 
- * @author Suyash
+ * @author Sona
  *
  */
 public final class Card {

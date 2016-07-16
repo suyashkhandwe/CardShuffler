@@ -1,14 +1,12 @@
-/**
- * Main package
- */
 package cardShuffler;
 
-import cardDeck.Card;
+import cardDeck.Deck;
+import cardDeck.DeckOfPokerCards;
 
 /**
  * This class hosts the main and calls other associated methods
  * 
- * @author Suyash
+ * @author Sona
  */
 public class CardShufflerEngine {
 
@@ -20,7 +18,13 @@ public class CardShufflerEngine {
 	 *            code
 	 */
 	public static void main(String[] args) {
-		Card c = new Card("c");
-		System.out.println(c.getCardName());
+		Deck pokerDeck = new Deck();
+		pokerDeck.setDeckType(new DeckOfPokerCards());
+		pokerDeck.setupNewDeck("poker");
+		pokerDeck.simpleShuffleCards();
+		for (int i = 0; i < 52; i++) {
+			System.out.println(
+					String.format("%1$s - %2$s", pokerDeck.getDeckName(), pokerDeck.getDeck()[i].getCardName()));
+		}
 	}
 }
